@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'rows_generator'
 require_relative 'rows_normalizer'
+require_relative 'rows_sorter'
 class PeopleController
   attr_reader :params
 
@@ -8,6 +11,7 @@ class PeopleController
   end
 
   def normalize
-    RowsNormalizer.normalize_rows(*RowsGenerator.generate(params[:dollar_format], '$'))
+    rows = RowsNormalizer.normalize_rows(*RowsGenerator.generate(params[:dollar_format], '$'))
+    RowsSorter.sort(rows, params[:order])
   end
 end
