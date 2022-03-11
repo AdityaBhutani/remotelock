@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RowsNormalizer
   CITY_CODES = {
     'LA' => 'Los Angeles',
@@ -35,6 +33,12 @@ class RowsNormalizer
 
   def birthdate
     index = header.index('birthdate')
-    row[index]
+    case separator
+    when '$'
+      date, month, year = row[index].split('-').map { |d| d.to_i.to_s }
+    when '%'
+      year, month, date = row[index].split('-').map { |d| d.to_i.to_s }
+    end
+    [month, date, year].join('/')
   end
 end
