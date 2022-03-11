@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RowsNormalizer
   CITY_CODES = {
     'LA' => 'Los Angeles',
