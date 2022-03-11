@@ -11,7 +11,8 @@ class PeopleController
   end
 
   def normalize
-    rows = RowsNormalizer.normalize_rows(*RowsGenerator.generate(params[:dollar_format], '$'))
+    rows = RowsNormalizer.normalize_rows(*RowsGenerator.generate(params[:dollar_format], '$')) +
+           RowsNormalizer.normalize_rows(*RowsGenerator.generate(params[:percent_format], '%'))
     RowsSorter.sort(rows, params[:order])
   end
 end
