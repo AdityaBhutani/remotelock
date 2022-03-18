@@ -40,6 +40,8 @@ class RowsNormalizer
       date, month, year = row[index].split('-').map { |d| d.to_i.to_s }
     when '%'
       year, month, date = row[index].split('-').map { |d| d.to_i.to_s }
+    when '|'
+      month, date, year = row[index].split('.').map { |d| d.to_i.to_s }
     end
     [month, date, year].join('/')
   end
